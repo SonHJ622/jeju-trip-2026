@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>제주 3박 4일 · 9.18–9.21</title>
+<style>
+:root{
+  --ash:#EDEFEA;
+  --paper:#FFFFFF;
+  --line:#D8DCD3;
+  --ink:#1B211D;
+  --mid:#5E665F;
+  --mute:#8B938B;
+  --basalt:#161B18;
+  --island:#242B27;
+  --coast:#3D4740;
+
+  --d1:#2FC1A8;
+  --d2:#F0A02E;
+  --d3:#9B8CF0;
+  --d4:#F2637C;
+
+  --gothic:'Apple SD Gothic Neo','Pretendard','Malgun Gothic','Noto Sans KR',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  --mono:'SF Mono','SFMono-Regular','Menlo','Consolas','D2Coding','Roboto Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--ash);
+  color:var(--ink);
+  font-family:var(--gothic);
+  line-height:1.6;
+  letter-spacing:-.01em;
+  padding:0 20px 80px;
+}
+.wrap{max-width:1180px;margin:0 auto}
+
+/* ── 헤더 ── */
+header{padding:56px 0 30px;border-bottom:2px solid var(--ink)}
+.eyebrow{
+  font-family:var(--mono);font-size:11px;letter-spacing:.22em;
+  color:var(--mid);text-transform:uppercase;margin-bottom:18px;
+}
+h1{
+  font-size:clamp(38px,7vw,68px);font-weight:800;line-height:.98;
+  letter-spacing:-.045em;
+}
+h1 .thin{font-weight:300;color:var(--mid)}
+.sub{
+  margin-top:16px;display:flex;flex-wrap:wrap;gap:8px 22px;
+  font-size:13.5px;color:var(--mid);
+}
+.sub b{color:var(--ink);font-weight:600}
+
+/* ── 탭 ── */
+nav{
+  display:flex;gap:6px;padding:20px 0;overflow-x:auto;
+  scrollbar-width:none;
+}
+nav::-webkit-scrollbar{display:none}
+.tab{
+  flex:0 0 auto;border:1px solid var(--line);background:var(--paper);
+  border-radius:999px;padding:9px 17px;cursor:pointer;
+  font-family:var(--gothic);font-size:13.5px;font-weight:600;color:var(--mid);
+  letter-spacing:-.02em;transition:.18s;
+}
+.tab:hover{border-color:var(--mid);color:var(--ink)}
+.tab:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.tab[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.tab .dot{
+  display:inline-block;width:7px;height:7px;border-radius:50%;
+  margin-right:7px;vertical-align:1px;
+}
+
+/* ── 본문 그리드 ── */
+.stage{display:grid;grid-template-columns:1.32fr 1fr;gap:26px;align-items:start}
+@media(max-width:900px){.stage{grid-template-columns:1fr}}
+
+/* ── 지도 ── */
+.mapcard{
+  background:var(--basalt);border-radius:18px;padding:14px;
+  position:sticky;top:16px;
+}
+@media(max-width:900px){.mapcard{position:static}}
+.mapcard svg{width:100%;height:auto;display:block;touch-action:pan-y;cursor:grab;
+  user-select:none;-webkit-user-select:none;border-radius:9px}
+.mapcard svg.zoomed{touch-action:none}
+.mapcard svg.grabbing{cursor:grabbing}
+.mapshell{position:relative}
+.zoomui{position:absolute;right:9px;top:9px;display:flex;flex-direction:column;gap:5px}
+.zb{width:35px;height:35px;border-radius:10px;border:1px solid #343D37;
+  background:rgba(20,25,22,.85);color:#D3D9D4;font-family:var(--mono);font-size:17px;
+  line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  -webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);transition:.15s}
+.zb:hover{background:#262E29;color:#fff;border-color:#525C54}
+.zb:active{transform:scale(.94)}
+.zb:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.zb.wide{font-size:9.5px;letter-spacing:.08em}
+.zlvl{position:absolute;left:10px;top:10px;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.11em;color:#7B847C;background:rgba(20,25,22,.72);
+  padding:6px 10px;border-radius:8px;pointer-events:none}
+.maphint{padding:10px 8px 0;font-size:11.5px;color:#68716A;line-height:1.55}
+.maplegend{
+  display:flex;flex-wrap:wrap;gap:6px 16px;padding:12px 8px 4px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:#7C857E;
+}
+.maplegend span{display:flex;align-items:center;gap:6px}
+.maplegend i{width:16px;height:2.5px;border-radius:2px;display:block}
+
+/* ── 일자 요약 ── */
+.daymeta{
+  background:var(--paper);border:1px solid var(--line);border-radius:16px;
+  padding:22px;margin-bottom:16px;
+}
+.daymeta .tag{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+  padding:4px 9px;border-radius:5px;color:#fff;display:inline-block;
+}
+.daymeta h2{font-size:24px;font-weight:800;letter-spacing:-.035em;margin:12px 0 4px}
+.daymeta .stay{font-size:13px;color:var(--mid)}
+
+/* 운전 게이지 */
+.gauge{margin-top:20px}
+.gauge .top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:8px}
+.gauge .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--mute)}
+.gauge .val{font-family:var(--mono);font-size:26px;font-weight:600;letter-spacing:-.03em}
+.gauge .val small{font-size:12px;font-weight:400;color:var(--mid);margin-left:3px}
+.track{height:9px;background:#E4E7E0;border-radius:999px;position:relative;overflow:visible}
+.fill{height:9px;border-radius:999px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.ceil{position:absolute;top:-5px;bottom:-5px;width:2px;background:var(--ink);opacity:.5}
+.ceilnote{
+  font-family:var(--mono);font-size:10px;color:var(--mute);
+  margin-top:7px;letter-spacing:.05em;
+}
+
+/* ── 타임라인 ── */
+.timeline{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:8px 22px 22px}
+.stop{display:grid;grid-template-columns:56px 1fr;gap:14px;padding:16px 8px 4px;
+  margin:0 -8px;border-radius:10px;cursor:pointer;transition:background .15s}
+.stop:hover{background:#F4F7F3}
+.stop:focus-visible{outline:2px solid var(--ink);outline-offset:-2px}
+.stop .t{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--ink);padding-top:2px}
+.stop .t.blank{color:var(--mute);font-weight:400}
+.stop .nm{font-size:16px;font-weight:700;letter-spacing:-.03em;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.kind{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;
+  border:1px solid var(--line);color:var(--mid);border-radius:4px;padding:2px 6px;
+  font-weight:400;
+}
+.kind.meal{border-color:#E8C79A;color:#A9720F;background:#FDF6EA}
+.stop .ds{font-size:13.5px;color:var(--mid);margin-top:5px;line-height:1.55}
+.stop .warn{
+  font-size:12.5px;margin-top:8px;padding:8px 11px;border-radius:8px;
+  background:#FDF0F2;color:#A32F45;border-left:3px solid var(--d4);
+}
+.leg{
+  display:grid;grid-template-columns:56px 1fr;gap:14px;align-items:center;
+  padding:2px 0;
+}
+.leg .rail{
+  grid-column:1;justify-self:center;width:2px;height:34px;
+  background:repeating-linear-gradient(to bottom,var(--line) 0 4px,transparent 4px 8px);
+}
+.leg .min{
+  font-family:var(--mono);font-size:12.5px;color:var(--mid);
+  display:flex;align-items:center;gap:7px;
+}
+.leg .min b{font-size:15px;font-weight:600;color:var(--ink);letter-spacing:-.02em}
+
+/* ── 전체 보기 카드 ── */
+.overview{display:grid;gap:12px}
+.ocard{
+  background:var(--paper);border:1px solid var(--line);border-radius:14px;
+  padding:18px 20px;display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;
+  cursor:pointer;text-align:left;font-family:var(--gothic);width:100%;
+  transition:.18s;
+}
+.ocard:hover{border-color:var(--ink);transform:translateY(-1px)}
+.ocard:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.ocard .d{font-family:var(--mono);font-size:11px;letter-spacing:.13em;color:var(--mute)}
+.ocard .h{font-size:17px;font-weight:800;letter-spacing:-.035em;margin:5px 0 5px}
+.ocard .r{font-size:12.5px;color:var(--mid);line-height:1.5}
+.ocard .drv{text-align:right;font-family:var(--mono)}
+.ocard .drv b{font-size:22px;font-weight:600;letter-spacing:-.03em;display:block}
+.ocard .drv small{font-size:10px;letter-spacing:.12em;color:var(--mute)}
+
+/* ── 하단 섹션 ── */
+section.blk{margin-top:56px}
+.blkhead{
+  display:flex;align-items:baseline;gap:14px;
+  padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:20px;
+}
+.blkhead h3{font-size:19px;font-weight:800;letter-spacing:-.035em}
+.blkhead .n{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--mute)}
+
+table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--paper);
+  border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--mute);
+  font-weight:400;background:#F7F8F5}
+tr:last-child td{border-bottom:none}
+td .alt{display:block;font-size:12px;color:var(--mute);margin-top:3px}
+.tblwrap{overflow-x:auto}
+table.wide{min-width:660px}
+.ok{color:#1E7A54;font-weight:600}
+.no{color:#A32F45;font-weight:600}
+
+.reccard{background:var(--paper);border:1px solid #B9DCDD;border-left:4px solid var(--rec);
+  border-radius:13px;padding:19px 21px;margin-bottom:12px}
+.reccard .rh{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:9px}
+.reccard .rn{font-family:var(--mono);font-size:10px;letter-spacing:.13em;color:var(--rec);
+  background:var(--recbg);padding:3px 8px;border-radius:5px}
+.reccard h4{font-size:16.5px;font-weight:800;letter-spacing:-.035em}
+.reccard p{font-size:13.5px;color:var(--mid);line-height:1.68}
+.reccard p+p{margin-top:9px}
+.reccard b{color:var(--ink)}
+.effect{margin-top:12px;padding:11px 13px;background:#F5F8F7;border-radius:9px;
+  font-family:var(--mono);font-size:12px;color:var(--mid);letter-spacing:-.01em;line-height:1.7}
+.effect b{color:var(--rec);font-weight:600}
+ul.check{list-style:none;display:grid;gap:9px}
+ul.check li{
+  background:var(--paper);border:1px solid var(--line);border-radius:10px;
+  padding:12px 15px;font-size:13.5px;display:flex;gap:11px;align-items:flex-start;
+}
+ul.check li::before{
+  content:'';flex:0 0 15px;height:15px;margin-top:3px;
+  border:1.5px solid var(--mute);border-radius:4px;
+}
+.notegrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.note{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.note h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--mute);font-weight:400;margin-bottom:9px}
+.note p{font-size:13.5px;color:var(--mid);line-height:1.65}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--mute)}
+
+/* 항공편 */
+.flights{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:700px){.flights{grid-template-columns:1fr}}
+.fl{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.fl h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--mute);font-weight:400;margin-bottom:6px}
+.seg{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;padding:13px 0;border-bottom:1px dashed var(--line)}
+.seg:last-of-type{border-bottom:none}
+.seg .ap{font-size:10.5px;color:var(--mute);font-family:var(--mono);letter-spacing:.12em}
+.seg .tm{font-family:var(--mono);font-size:21px;font-weight:600;letter-spacing:-.03em;display:block;margin-top:1px}
+.seg .ar{color:var(--mute);font-size:11px;text-align:center;font-family:var(--mono);letter-spacing:.06em}
+.seg .r{text-align:right}
+.need{margin-top:14px;padding:11px 13px;background:#F2F5F2;border-radius:9px;font-size:12.5px;color:var(--mid);line-height:1.6}
+.need b{color:var(--ink);font-family:var(--mono);letter-spacing:-.02em}
+
+/* 숙소 */
+.lodges{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:12px}
+.lodge{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:0 20px 18px;border-top:3px solid}
+.lodge .d{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;color:var(--mute);padding-top:16px}
+.lodge h4{font-size:16px;font-weight:800;letter-spacing:-.035em;margin:6px 0 13px}
+.lodge dl{display:grid;grid-template-columns:auto 1fr;gap:7px 12px;font-size:12.5px;margin-bottom:13px}
+.lodge dt{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;color:var(--mute);padding-top:3px}
+.lodge dd{color:var(--mid);line-height:1.55}
+.lodge dd b{color:var(--ink);font-weight:600}
+.gap{font-size:12.5px;padding:10px 12px;border-radius:9px;background:#FDF0F2;color:#A32F45;border-left:3px solid var(--d4);line-height:1.6}
+.gap span{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;margin-bottom:5px;opacity:.75}
+
+/* 준비물 */
+.packs{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.pack{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.pack h4{font-family:var(--mono);font-size:10px;letter-spacing:.13em;color:var(--mute);font-weight:400;margin-bottom:10px}
+.pack ul{list-style:none;display:grid;gap:7px;font-size:13px}
+.pack li{padding-left:15px;position:relative;color:var(--mid);line-height:1.5}
+.pack li::before{content:'';position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--line)}
+.pack li b{color:var(--ink);font-weight:600}
+.pack li.hot::before{background:var(--d4)}
+
+.verdict{
+  background:var(--ink);color:#EDEFEA;border-radius:14px;padding:20px 22px;margin-top:14px;
+  font-size:13.5px;line-height:1.7;
+}
+.verdict h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;color:#8B938B;font-weight:400;margin-bottom:9px}
+.verdict b{color:#fff}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">JEJU · 2026.09.18 FRI — 09.21 MON · 3N 4D</div>
+  <h1>제주 한 바퀴<br><span class="thin">부모님과 천천히</span></h1>
+  <div class="sub">
+    <span>하루 운전 <b>2시간 내외</b></span>
+    <span>총 이동 <b>7시간 43분</b></span>
+    <span>가는 편 <b>대구 08:10 · 김포 07:35</b></span>
+    <span>오는 편 <b>대구 17:50 · 김포 18:20</b></span>
+  </div>
+</header>
+
+<nav id="tabs" role="tablist" aria-label="일자 선택"></nav>
+
+<div class="stage">
+  <div class="mapcard">
+    <div class="mapshell">
+      <svg id="map" viewBox="0 0 1000 620" role="img" aria-label="제주도 일정 지도"></svg>
+      <div class="zlvl" id="zlvl">전체</div>
+      <div class="zoomui">
+        <button class="zb" id="zin" aria-label="확대" title="확대">+</button>
+        <button class="zb" id="zout" aria-label="축소" title="축소">−</button>
+        <button class="zb wide" id="zfit" aria-label="전체 보기로" title="전체 보기">FIT</button>
+      </div>
+    </div>
+    <div class="maphint">휠 또는 두 손가락으로 확대 · 끌어서 이동 · 더블클릭으로 확대 · 오른쪽 일정을 누르면 그 지점으로 이동합니다</div>
+    <div class="maplegend" id="legend"></div>
+  </div>
+  <div id="panel"></div>
+</div>
+
+<section class="blk">
+  <div class="blkhead"><span class="n">01</span><h3>원안에서 바꾼 것</h3></div>
+  <div class="tblwrap">
+  <table class="chg">
+    <thead><tr><th>항목</th><th>원안</th><th>수정</th><th>이유</th></tr></thead>
+    <tbody>
+      <tr><td>카멜리아힐</td><td><s>2일차</s></td><td><b>3일차</b></td><td>안덕면 소재. 산방산에서 15분. 2일차에 두면 왕복 80분 낭비</td></tr>
+      <tr><td>2일차 관광</td><td><s>카멜리아힐</s></td><td><b>보롬왓</b></td><td>성읍에서 15분. 꽃정원·산책로로 성격이 같음</td></tr>
+      <tr><td>2일차 아침</td><td><s>순희밥상</s></td><td><b>성산 행복한밥상</b></td><td>순희밥상은 11:30 오픈 + 일요일 휴무</td></tr>
+      <tr><td>2일차 점심</td><td><s>번네식당</s></td><td><b>바당길 서귀포점</b></td><td>번네식당은 안덕 소재. 성읍에서 60분 걸림</td></tr>
+      <tr><td>3일차 아침</td><td><s>우진해장국</s></td><td><b>서귀포 시내</b></td><td>우진은 제주시. 왕복 1시간 40분 소모</td></tr>
+      <tr><td>3일차 점심</td><td><s>바당길</s></td><td><b>번네식당</b></td><td>산방산에서 10분. 두 식당의 위치를 맞바꿈</td></tr>
+      <tr><td>1·4일차 식사</td><td><s>두 끼 간격 40~75분</s></td><td><b>2시간 이상</b></td><td>부모님 동행 시 과식 부담</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section class="blk">
+  <div class="blkhead"><span class="n">02</span><h3>항공편</h3></div>
+  <div class="flights">
+    <div class="fl">
+      <h4>9.18 FRI · 제주로</h4>
+      <div class="seg">
+        <div><span class="ap">대구 · 제주항공</span><span class="tm">08:10</span></div>
+        <div class="ar">1H05</div>
+        <div class="r"><span class="ap">제주</span><span class="tm">09:15</span></div>
+      </div>
+      <div class="seg">
+        <div><span class="ap">김포 · 이스타항공</span><span class="tm">07:35</span></div>
+        <div class="ar">1H15</div>
+        <div class="r"><span class="ap">제주</span><span class="tm">08:50</span></div>
+      </div>
+      <div class="need">
+        공항 도착 — 김포 팀 <b>06:20</b> · 대구 팀 <b>06:50</b><br>
+        제주 합류 <b>09:40</b> → 렌터카 인수 완료 <b>10:40</b>
+      </div>
+    </div>
+    <div class="fl">
+      <h4>9.21 MON · 집으로</h4>
+      <div class="seg">
+        <div><span class="ap">제주 · 제주항공</span><span class="tm">17:50</span></div>
+        <div class="ar">1H05</div>
+        <div class="r"><span class="ap">대구</span><span class="tm">18:55</span></div>
+      </div>
+      <div class="seg">
+        <div><span class="ap">제주 · 이스타항공</span><span class="tm">18:20</span></div>
+        <div class="ar">1H15</div>
+        <div class="r"><span class="ap">김포</span><span class="tm">19:35</span></div>
+      </div>
+      <div class="need">
+        렌터카 반납 <b>15:30</b> → 공항 도착 <b>16:00</b><br>
+        국내선 수속은 출발 30분 전 마감 · 대구 팀 먼저, 김포 팀 30분 대기
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="blk">
+  <div class="blkhead"><span class="n">03</span><h3>항공편과 공항 가는 길</h3></div>
+  <div class="flights">
+    <div class="fl">
+      <h4>9.18 FRI · 제주로</h4>
+      <div class="seg">
+        <div><span class="ap">대구 · 제주항공</span><span class="tm">08:10</span></div>
+        <div class="ar">1H05</div>
+        <div class="r"><span class="ap">제주</span><span class="tm">09:15</span></div>
+      </div>
+      <div class="seg">
+        <div><span class="ap">김포 · 이스타항공</span><span class="tm">07:35</span></div>
+        <div class="ar">1H15</div>
+        <div class="r"><span class="ap">제주</span><span class="tm">08:50</span></div>
+      </div>
+      <div class="need">
+        집 출발 — 김포 팀 <b>05:20</b> · 대구 팀 <b>06:20</b> (둘 다 택시)<br>
+        공항 도착 — 김포 팀 <b>06:20</b> · 대구 팀 <b>06:45</b><br>
+        제주 합류 <b>09:40</b> → 렌터카 인수 완료 <b>10:40</b>
+      </div>
+    </div>
+    <div class="fl">
+      <h4>9.21 MON · 집으로</h4>
+      <div class="seg">
+        <div><span class="ap">제주 · 제주항공</span><span class="tm">17:50</span></div>
+        <div class="ar">1H05</div>
+        <div class="r"><span class="ap">대구</span><span class="tm">18:55</span></div>
+      </div>
+      <div class="seg">
+        <div><span class="ap">제주 · 이스타항공</span><span class="tm">18:20</span></div>
+        <div class="ar">1H15</div>
+        <div class="r"><span class="ap">김포</span><span class="tm">19:35</span></div>
+      </div>
+      <div class="need">
+        렌터카 반납 <b>15:30</b> → 공항 도착 <b>16:00</b><br>
+        국내선 수속은 출발 30분 전 마감 · 대구 팀 먼저, 김포 팀 30분 대기
+      </div>
+    </div>
+  </div>
+
+  <div class="reccard" style="margin-top:14px;border-left-color:var(--d4);border-color:#F0C4CD">
+    <div class="rh"><span class="rn" style="background:#FDF0F2;color:#A32F45">김포 팀</span><h4>첫차로는 못 갑니다</h4></div>
+    <p>용인 수지구 동천동에서 가장 가까운 역은 신분당선 동천역입니다. 여기서 김포공항까지는 <b>신논현에서 9호선으로 갈아타는 경로 하나뿐</b>인데, 첫차를 타도 이렇게 됩니다.</p>
+    <div class="effect" style="background:#FDF0F2">
+      동천역 첫차 <b style="color:#A32F45">05:42</b> → 신논현 06:07 → 9호선 환승·대기 06:17<br>
+      → 김포공항역 <b style="color:#A32F45">06:54</b> → 국내선 청사 도보 8분 → <b style="color:#A32F45">07:02 도착</b><br>
+      07:35 출발편 카운터 마감 <b style="color:#A32F45">07:05</b> · 여유 3분
+    </div>
+    <p style="margin-top:11px"><b>이 3분은 &lsquo;빠듯하지만 되는&rsquo; 3분이 아니라, 모든 게 정확히 맞았을 때만 남는 3분입니다.</b> 세 가지가 겹칩니다.</p>
+    <p>① 환승이 <b>05:42 첫차 딱 한 대</b>에 걸려 있습니다. 동천역 첫차를 놓치거나 신논현 9호선 환승에서 한 대(새벽 배차 10분 이상)를 놓치면 07:02가 07:15가 되고, 그 순간 마감입니다. ② 07:05는 <b>짐 부치기까지 끝나야 하는 카운터 마감</b>입니다. 부모님과 캐리어면 줄에서 이미 밀립니다. ③ 새벽 첫차는 한 대만 놓쳐도 다음 열차까지 10분 이상 통으로 밀려 <b>복구가 안 됩니다.</b></p>
+    <p>택시가 더 막힐까 걱정되실 수 있지만, <b>새벽 5시 20분이면 강남 관통 구간도 뚫려 있어 서울도 막히지 않습니다.</b> 오히려 지하철은 첫차 시각이 고정이라 당길 수가 없는 반면, 택시는 불안하면 05:00에 나서 여유를 30분 더 벌 수 있습니다. 부모님 모시고 새벽에 뛰는 상황은 피하는 게 맞습니다.</p>
+    <p><b>택시 기준 05:20 출발이면 06:20~06:30 도착</b>입니다. 동천동에서 김포공항까지 약 45km, 새벽이라 50~60분 걸리고 요금은 6~7만원대로 예상됩니다. 전날 카카오T로 예약을 걸어두세요.</p>
+  </div>
+
+  <div class="reccard" style="margin-top:12px">
+    <div class="rh"><span class="rn">대구 팀</span><h4>06:20에 출발하면 됩니다</h4></div>
+    <p>중구 남산동에서 대구국제공항까지 약 12km입니다. 새벽이라 <b>20~25분</b>이면 닿고, 요금은 13,000~16,000원 정도로 예상됩니다. 대구 심야할증은 04시에 끝나므로 할증은 붙지 않습니다.</p>
+    <div class="effect">
+      집 출발 <b>06:20</b> → 대구공항 <b>06:45</b> → 08:10 출발편 수속 마감 07:40 · 여유 55분
+    </div>
+    <p style="margin-top:11px">새벽 시간대는 일반 호출이 잡히지 않을 수 있습니다. <b>카카오T 택시 예약은 출발 24시간 전부터 걸 수 있고, 예약료 1,000~2,000원이 붙는 대신 배차가 확정</b>됩니다. 다만 지역과 시간대에 따라 예약 기능이 뜨지 않는 경우가 있으니 <b>미리 앱에서 9/18 06:20으로 조회</b>해 보세요.</p>
+    <p>참고로 대구공항은 주차 예약 서비스를 운영하지 않고 선착순입니다. 택시로 정하신 건 새벽에 짐 들고 주차장을 걷지 않아도 되니 좋은 선택입니다. 돌아오는 9/21 19:00대는 일반 호출로도 무난합니다.</p>
+  </div>
+
+</section>
+
+<section class="blk">
+  <div class="blkhead"><span class="n">04</span><h3>숙소</h3></div>
+  <p style="font-size:13.5px;color:var(--mid);margin-bottom:14px">
+    세 곳 모두 <b style="color:var(--ink)">체크인 15:00 / 체크아웃 11:00</b>, <b style="color:var(--ink)">호텔 주차장 사용 가능</b>. 렌터카 여행에서 가장 중요한 조건은 다 충족됩니다. 아래는 빠진 것들만 정리했습니다.
+  </p>
+  <div class="verdict" style="margin-top:0;margin-bottom:16px">
+    <h4>먼저 알아둘 것 · 칫솔과 치약</h4>
+    2024년 3월 29일부터 <b>객실 50실 이상 숙박업소는 일회용 칫솔·치약·샴푸·린스·면도기를 무상으로 제공할 수 없습니다.</b> 자원재활용법 개정에 따른 것이고, 어기면 과태료가 부과됩니다. 그래서 베니키아호텔 제주도 샴푸·린스·바디워시는 다회용 디스펜서로 두고 칫솔·치약은 주지 않습니다. 나머지 두 곳의 &lsquo;욕실용품&rsquo;도 비누와 다회용 세정제를 뜻할 가능성이 큽니다. <b>세 곳 다 칫솔·치약은 없다고 보고 챙기는 편이 안전합니다.</b>
+  </div>
+  <div class="lodges">
+    <div class="lodge" style="border-top-color:var(--d1)">
+      <div class="d">DAY 1 · 9.18</div>
+      <h4>더베스트 제주 성산호텔</h4>
+      <dl>
+        <dt>일정</dt><dd>17:00 체크인 · 다음 날 <b>08:30</b> 체크아웃</dd>
+        <dt>있음</dt><dd>에어컨 · TV · 냉장고 · 커피포트 · 샤워시설 · <b>비데</b> · 욕실용품 · 드라이기 · WiFi · 금연</dd>
+      </dl>
+      <div class="gap"><span>CHECK</span>세 곳 중 가장 완비된 숙소입니다. 비데와 욕실용품이 있는 유일한 곳이라, 부족한 물건은 이날 밤에 미리 파악해 두면 남은 이틀을 대비할 수 있습니다.</div>
+    </div>
+    <div class="lodge" style="border-top-color:var(--d2)">
+      <div class="d">DAY 2 · 9.19</div>
+      <h4>디아일랜드블루호텔</h4>
+      <dl>
+        <dt>일정</dt><dd>15:50 체크인 · 다음 날 <b>08:10</b> 체크아웃</dd>
+        <dt>있음</dt><dd>에어컨 · TV · 냉장고 · 커피포트 · 샤워시설 · 욕실용품 · 드라이기 · WiFi</dd>
+        <dt>없음</dt><dd>비데</dd>
+      </dl>
+      <div class="gap"><span>CHECK</span>수건이 작고 부족하다는 후기가 반복적으로 올라옵니다. 체크인할 때 <b>수건을 넉넉히 요청</b>하세요. 체크아웃 시간을 엄격하게 지킨다는 후기도 많으니 11:00을 믿고 늦추지 마세요. 침대 주변 콘센트가 부족하다는 언급도 있어 <b>멀티탭이나 긴 충전 케이블</b>이 유용합니다.</div>
+    </div>
+    <div class="lodge" style="border-top-color:var(--d3)">
+      <div class="d">DAY 3 · 9.20</div>
+      <h4>베니키아호텔 제주</h4>
+      <dl>
+        <dt>일정</dt><dd>18:05 체크인 · 다음 날 <b>08:40</b> 체크아웃</dd>
+        <dt>있음</dt><dd>에어컨 · 개별난방 · TV · 냉장고 · 커피포트 · 샤워시설 · 드라이기 · 비누 · 수건 · <b>다회용 샴푸·린스·바디워시</b></dd>
+        <dt>없음</dt><dd><b>칫솔 · 치약</b> · 비데</dd>
+      </dl>
+      <div class="gap"><span>CHECK</span>샴푸·린스·바디워시는 다회용 디스펜서로 비치돼 있어 따로 챙길 필요가 없습니다. <b>칫솔과 치약만 인원수대로 준비하세요.</b> 관광버스가 서는 위치라 소음 후기가 많아 귀마개가 도움이 됩니다. 조식이 값에 비해 부실하다는 평이 많은데, 어차피 4일차 아침은 애월 브런치오라 신청하지 않아도 됩니다.</div>
+    </div>
+  </div>
+</section>
+
+<section class="blk">
+  <div class="blkhead"><span class="n">05</span><h3>챙길 것</h3></div>
+  <div class="packs">
+    <div class="pack">
+      <h4>숙소가 안 주는 것</h4>
+      <ul>
+        <li class="hot"><b>칫솔·치약</b> 인원수대로 — 세 곳 다 무상 제공이 법으로 막혀 있습니다</li>
+        <li class="hot">면도기 — 같은 규제 대상 품목</li>
+        <li><b>수건</b> 1~2장 — 2일차 대비. 1·3일차는 제공됩니다</li>
+        <li>슬리퍼 — 세 곳 다 안내에 없음</li>
+        <li>멀티탭 또는 긴 충전 케이블</li>
+        <li>귀마개 — 3일차 소음 대비</li>
+      </ul>
+      <p style="font-size:11.5px;color:var(--mute);margin-top:11px;line-height:1.55">
+        샴푸·린스·바디워시는 3일차에 다회용으로 비치돼 있어 따로 챙기지 않아도 됩니다.
+      </p>
+    </div>
+    <div class="pack">
+      <h4>있으면 편한 것</h4>
+      <ul>
+        <li class="hot"><b>일회용 접시·젓가락·가위·물티슈</b> — 2일차 올레시장 회를 방에서 먹을 때. 형제수산에 포장 요청도 함께</li>
+        <li>믹스커피·티백 — 세 곳 다 커피포트 있음</li>
+        <li>생수 — 냉장고 있으니 미리 사두기</li>
+        <li>장바구니 또는 보냉백</li>
+      </ul>
+    </div>
+    <div class="pack">
+      <h4>부모님용</h4>
+      <ul>
+        <li>상비약 · 평소 복용약</li>
+        <li>모자·선크림 — 9월 제주는 자외선이 셉니다</li>
+        <li>얇은 겉옷 — 해변 바람이 찹니다</li>
+        <li>편한 운동화 — 사려니·카멜리아힐은 걷는 구간</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="blk">
+  <div class="blkhead"><span class="n">06</span><h3>식사</h3></div>
+  <div class="tblwrap">
+  <table>
+    <thead><tr><th>날짜</th><th>아침</th><th>점심</th><th>저녁</th></tr></thead>
+    <tbody>
+      <tr><td>9/18 금</td><td>제주김만복김밥<span class="alt">포장 권장</span></td><td>담백 함덕점<span class="alt">대안 · 뱅규네 제주고기국수</span></td><td>금돗 성산흑돼지<span class="alt">대안 · 새벽숯불가든</span></td></tr>
+      <tr><td>9/19 토</td><td>성산 행복한밥상<span class="alt">06:00 오픈 · 대안 제주선채향</span></td><td>바당길 서귀포점<span class="alt">대안 · 금자매식당</span></td><td>올레시장 형제수산<span class="alt">대안 · 다정이네</span></td></tr>
+      <tr><td>9/20 일</td><td>서귀포 시내<span class="alt">늘소담 등 · 영업시간 확인</span></td><td>번네식당<span class="alt">대안 · 모두의제주</span></td><td>애월 갈치 암행어사<span class="alt">대안 · 만족한상회</span></td></tr>
+      <tr><td>9/21 월</td><td>애월 브런치오</td><td>먹돌고기국수 본점</td><td>비행기 이동</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section class="blk">
+  <div class="blkhead"><span class="n">07</span><h3>출발 전 확인</h3></div>
+  <ul class="check">
+    <li><b>카카오T에서 9/18 06:20 택시 예약이 걸리는지 시험 조회</b> — 주차냐 택시냐는 여기서 갈립니다</li>
+    <li>집에서 대구공항까지 택시 예상 요금 (왕복 기준으로 주차료와 비교)</li>
+    <li>제주항공 · 이스타항공 수하물 규정과 위탁 마감 시각</li>
+    <li>1·2일차 숙소의 &lsquo;욕실용품&rsquo;에 칫솔·치약이 포함되는지 문의 (대부분 비누·다회용 세정제만 해당)</li>
+    <li>디아일랜드블루호텔에 수건 추가 요청 가능한지 문의</li>
+    <li>번네식당 · 바당길 영업시간 재확인 (둘 다 수요일 휴무, 여행일엔 정상 영업)</li>
+    <li>성산 행복한밥상 예약 가능 여부 — 좌석이 적은 편</li>
+    <li>보롬왓 9월 개화 상태 (메밀꽃 · 핑크뮬리 시즌)</li>
+    <li>금돗 성산흑돼지 저녁 예약</li>
+    <li>3일차 서귀포 아침 식당 영업 시작 시각</li>
+    <li>렌터카 인수 셔틀 탑승 위치 · 반납 마감 시각</li>
+  </ul>
+</section>
+
+<section class="blk">
+  <div class="blkhead"><span class="n">08</span><h3>기억할 것</h3></div>
+  <div class="notegrid">
+    <div class="note"><h4>PHOTO</h4><p>함덕해수욕장 · 광치기해변(성산일출봉 배경) · 보롬왓 · 카멜리아힐 · 산방산+사계해변 · 협재해수욕장 · 애월 해안도로</p></div>
+    <div class="note"><h4>RESTROOM</h4><p>함덕해수욕장 · 사려니숲길 입구 · 성읍민속마을 · 보롬왓 · 천지연폭포 · 카멜리아힐 · 오설록 · 협재해수욕장 · 제주공항</p></div>
+    <div class="note"><h4>RULES</h4><p>함덕엔 시간을 넉넉히. 사려니는 무장애 데크길 30분만. 올레시장은 18시 도착. 마지막 날은 여유롭게. 엄마아빠 사진 많이 찍기.</p></div>
+    <div class="note"><h4>RAIN PLAN</h4><p>3일차에 비가 오면 협재해수욕장을 빼고 노형슈퍼마켓으로. 실내라 부모님도 편하고 오설록에서 25분 거리.</p></div>
+  </div>
+</section>
+
+<footer>JEJU ITINERARY · 이동시간은 평상시 교통 기준 추정치 · 주말·성수기엔 10~20% 여유</footer>
+</div>
+
+<script>
+/* ─────────── 투영 ─────────── */
+const LNG0=126.13,LNG1=127.00,LAT0=33.15,LAT1=33.60,W=1000,H=620;
+const px=l=>(l-LNG0)/(LNG1-LNG0)*W;
+const py=l=>(LAT1-l)/(LAT1-LAT0)*H;
+
+/* ─────────── 데이터 ─────────── */
+const DAYS=[
+{
+ id:1,date:'9/18 금',theme:'제주 동부 해안 & 숲',color:'--d1',stay:'더베스트 제주 성산호텔',
+ route:'공항 → 함덕 → 사려니숲길 → 광치기 → 성산',
+ stops:[
+  {t:'09:15',n:'제주공항',lat:33.5113,lng:126.4930,lo:'sw',
+   d:'김포 팀 <b>08:50</b> · 대구 팀 <b>09:15</b> 도착. 수하물까지 감안하면 <b>09:40 합류</b>가 현실적입니다. 이어서 렌터카 셔틀 이동과 수속에 45~60분 — 10:40쯤 출발. 10:50 김만복김밥 포장해 차에서 아침.',
+   warn:'원안의 렌터카 30분은 부족합니다. 김포 팀이 대구 팀을 25분쯤 기다리게 되니 만날 지점(3층 식음료 구역 등)을 미리 정해두세요.'},
+  {t:'11:40',n:'함덕해수욕장',lat:33.5434,lng:126.6698,lo:'n',leg:40,
+   d:'해변 산책과 오션뷰 카페로 80분. 13:00 담백 함덕점에서 점심. 이 일정에서 가장 여유 있는 구간입니다.',kind:'meal'},
+  {t:'14:35',n:'사려니숲길',lat:33.3950,lng:126.6840,lo:'w',leg:35,
+   d:'무장애 나눔길만 30~40분. 붉은오름 입구는 17:00 마감이니 15:20에는 출발.',
+   warn:'원안엔 함덕→사려니 이동시간이 0분으로 잡혀 있었습니다.'},
+  {t:'16:10',n:'광치기해변',lat:33.4478,lng:126.9270,lo:'s',leg:50,
+   d:'성산일출봉을 배경으로 한 사진 스팟. 일출봉을 오르지 않아도 충분합니다.'},
+  {t:'17:00',n:'성산 숙소',lat:33.4590,lng:126.9330,lo:'n',leg:5,
+   d:'체크인 후 휴식. 18:00 금돗 성산흑돼지에서 저녁 — 직원이 직접 구워줍니다.',kind:'meal'}
+ ]
+},
+{
+ id:2,date:'9/19 토',theme:'전통문화 & 서귀포',color:'--d2',stay:'디아일랜드블루호텔 · 올레시장 도보권',
+ route:'성산 → 성읍 → 보롬왓 → 남원 → 천지연 → 올레시장',
+ from:{lat:33.4590,lng:126.9330},
+ stops:[
+  {t:'09:00',n:'성산 행복한밥상',lat:33.4078,lng:126.8740,lo:'e',leg:15,
+   d:'<b>08:30 체크아웃</b> 후 짐을 싣고 출발(마감 11:00). 06:00부터 여는 가정식 백반으로, 전날 고기를 먹은 다음 날 아침에 적당합니다.',kind:'meal',
+   warn:'원안의 순희밥상은 11:30 오픈이라 아침이 불가능합니다.'},
+  {t:'10:20',n:'성읍민속마을',lat:33.3859,lng:126.7982,lo:'s',leg:30,
+   d:'초가집과 제주 옛 모습. 50분이면 충분히 둘러봅니다.'},
+  {t:'11:25',n:'보롬왓',lat:33.4064,lng:126.7742,lo:'n',leg:15,
+   d:'표선의 꽃밭 정원. 성읍 바로 옆이라 이동이 거의 없고, 카멜리아힐을 대신할 산책·사진 코스입니다.'},
+  {t:'12:55',n:'바당길 서귀포점',lat:33.2633,lng:126.6410,lo:'e',leg:25,
+   d:'남원 해안의 보말칼국수·전복죽 전문점. 성읍에서 서귀포로 내려가는 길목에 정확히 놓입니다. 15:30 마감.',kind:'meal'},
+  {t:'14:35',n:'천지연폭포',lat:33.2469,lng:126.5545,lo:'w',leg:35,
+   d:'경사가 완만해 부모님도 편하게 걷습니다.'},
+  {t:'15:50',n:'서귀포 숙소',lat:33.2478,lng:126.5640,lo:'s',leg:5,
+   d:'체크인은 15:00부터 가능하니 바로 들어갑니다. <b>16:20~17:40 호텔 휴식</b>. 3박 4일에서 이 낮 휴식이 마지막 날 컨디션을 가릅니다. 17:50 올레시장 도보 이동 — 회가 신선하고 덜 붐비는 시각.',kind:'meal'}
+ ]
+},
+{
+ id:3,date:'9/20 일',theme:'제주 서부 절경',color:'--d3',stay:'베니키아호텔 제주 · 애월해안로',
+ route:'서귀포 → 산방산 → 안덕 → 오설록 → 협재 → 애월',
+ from:{lat:33.2459,lng:126.5658},
+ stops:[
+  {t:'10:00',n:'산방산 & 사계해변',lat:33.2358,lng:126.3132,lo:'s',leg:40,
+   d:'<b>08:10 체크아웃</b>(마감 11:00, 이 호텔은 시간 엄수가 엄격하다는 후기가 많음) 후 08:30 서귀포 시내에서 아침을 먹고 출발. 산방산은 멀리서 보는 풍경이 가장 좋고, 사계해변에서 함께 사진을 담습니다.',
+   warn:'원안의 우진해장국은 제주시라 왕복 1시간 40분이 그냥 사라집니다. 꼭 가고 싶다면 4일차 아침으로.'},
+  {t:'11:45',n:'번네식당',lat:33.2457,lng:126.3296,lo:'n',leg:10,
+   d:'산방산에서 10분. 정오를 넘기면 웨이팅이 생기니 11:45 도착이 안전합니다. 15:00 마감.',kind:'meal'},
+  {t:'13:15',n:'카멜리아힐',lat:33.2898,lng:126.3683,lo:'e',leg:15,
+   d:'2일차에서 옮겨온 핵심 변경점. 여기서 오설록까지 15분이라 서쪽 코스가 한 줄로 이어집니다.'},
+  {t:'15:10',n:'오설록 티뮤지엄',lat:33.3057,lng:126.2892,lo:'w',leg:15,
+   d:'녹차밭과 디저트. 부모님 쉬어가기 가장 좋은 지점입니다.'},
+  {t:'16:35',n:'협재해수욕장',lat:33.3940,lng:126.2397,lo:'w',leg:25,
+   d:'에메랄드빛 바다와 비양도 조망. 비가 오면 여기를 빼고 노형슈퍼마켓으로.'},
+  {t:'18:05',n:'애월 숙소',lat:33.4777,lng:126.3621,lo:'n',leg:25,
+   d:'해안도로를 타고 이동하며 일몰(18:40경)을 봅니다. 18:45 애월 갈치 암행어사에서 저녁.',kind:'meal'}
+ ]
+},
+{
+ id:4,date:'9/21 월',theme:'애월 & 제주공항',color:'--d4',stay:'—',
+ route:'애월 → 제주시 → 도두·이호테우 → 공항',
+ from:{lat:33.4777,lng:126.3621},
+ stops:[
+  {t:'09:00',n:'애월 브런치오',lat:33.4767,lng:126.3537,lo:'w',leg:3,
+   d:'<b>08:40에 먼저 체크아웃</b>하고 짐을 실은 뒤 이동하세요. 브런치오는 숙소에서 1km라 돌아올 필요가 없습니다. 09:00 오픈, 바다가 보이는 자리. 10:10 출발.',kind:'meal'},
+  {t:'11:00',n:'유니클로 도남점',lat:33.4801,lng:126.5228,lo:'n',leg:35,
+   d:'11:00 오픈이라 서두를 필요가 없습니다. 제주에서 가장 큰 매장이고 주차가 넓습니다.',
+   warn:'원안엔 애월→제주시가 15분으로 잡혀 있었습니다. 실제 35분.'},
+  {t:'12:05',n:'먹돌고기국수 본점',lat:33.5036,lng:126.4980,lo:'e',leg:15,
+   d:'공항 바로 옆. 마지막 식사로 부담이 없습니다.',kind:'meal'},
+  {t:'13:15',n:'도두 · 이호테우',lat:33.5030,lng:126.4590,lo:'s',leg:10,
+   d:'무지개해안도로와 말등대. 14:15부터 도두몰 기념품 쇼핑은 선택.'},
+  {t:'16:00',n:'제주공항',lat:33.5113,lng:126.4930,lo:'n',leg:15,
+   d:'15:30 렌터카 반납 — 셔틀 대기까지 30분 필요합니다. 대구 팀 <b>17:50</b>, 김포 팀 <b>18:20</b> 출발. 국내선 수속은 출발 30분 전 마감이라 여유는 충분하고, 대구 팀을 보낸 뒤 김포 팀이 30분 더 기다리는 구조입니다.',
+   warn:'마음샌드는 오전에 매진되는 경우가 많습니다. 16시 도착이면 없을 확률이 높으니 기대치를 낮추세요.'}
+ ]
+}
+];
+
+/* 구간 합계 */
+DAYS.forEach(d=>d.drive=d.stops.reduce((s,x)=>s+(x.leg||0),0));
+
+/* ─────────── 해안선 ─────────── */
+const COAST=[[33.5250,126.4870],[33.5180,126.5400],[33.5330,126.5900],[33.5480,126.6700],
+[33.5590,126.7550],[33.5570,126.8050],[33.5230,126.8700],[33.4970,126.9200],
+[33.4600,126.9410],[33.4300,126.9270],[33.3800,126.8900],[33.3200,126.8450],
+[33.2900,126.7700],[33.2500,126.6600],[33.2360,126.5600],[33.2400,126.4200],
+[33.2200,126.3300],[33.1970,126.2600],[33.2300,126.1900],[33.2900,126.1650],
+[33.3500,126.1780],[33.4050,126.2280],[33.4400,126.2700],[33.4700,126.3200],
+[33.4880,126.3900],[33.5000,126.4400]].map(p=>[px(p[1]),py(p[0])]);
+
+function smoothClosed(p){
+  const n=p.length;let d=`M${p[0][0].toFixed(1)},${p[0][1].toFixed(1)}`;
+  for(let i=0;i<n;i++){
+    const a=p[(i-1+n)%n],b=p[i],c=p[(i+1)%n],e=p[(i+2)%n];
+    const c1=[b[0]+(c[0]-a[0])/6,b[1]+(c[1]-a[1])/6];
+    const c2=[c[0]-(e[0]-b[0])/6,c[1]-(e[1]-b[1])/6];
+    d+=` C${c1[0].toFixed(1)},${c1[1].toFixed(1)} ${c2[0].toFixed(1)},${c2[1].toFixed(1)} ${c[0].toFixed(1)},${c[1].toFixed(1)}`;
+  }
+  return d+'Z';
+}
+const COASTPATH=smoothClosed(COAST);
+
+const map=document.getElementById('map');
+const cs=getComputedStyle(document.documentElement);
+const col=v=>cs.getPropertyValue(v).trim();
+
+/* ─────────── 뷰 상태 (확대·이동) ─────────── */
+const AR=W/H, MINW=110, MAXW=W*1.16;
+let VIEW={x:0,y:0,w:W,h:H}, AUTOFIT=true;
+const manual=()=>{AUTOFIT=false;};
+const zlvl=document.getElementById('zlvl');
+const RM=()=>matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+function applyView(){
+  map.setAttribute('viewBox',`${VIEW.x.toFixed(2)} ${VIEW.y.toFixed(2)} ${VIEW.w.toFixed(2)} ${VIEW.h.toFixed(2)}`);
+  const s=VIEW.w/W;
+  map.querySelectorAll('.pin').forEach(p=>{
+    p.setAttribute('transform',`translate(${p.dataset.x},${p.dataset.y}) scale(${s.toFixed(4)})`);
+  });
+  const z=W/VIEW.w;
+  zlvl.textContent = z<1.06 ? '전체' : '×'+z.toFixed(1);
+  map.classList.toggle('zoomed', !AUTOFIT);
+}
+function clampView(x,y,w){
+  w=Math.max(MINW,Math.min(MAXW,w));
+  const h=w/AR, M=240;
+  const xMax=Math.max(-M,W+M-w), yMax=Math.max(-M,H+M-h);
+  return {x:Math.max(-M,Math.min(xMax,x)),y:Math.max(-M,Math.min(yMax,y)),w,h};
+}
+let anim=null;
+function setView(x,y,w,animate){
+  const t=clampView(x,y,w);
+  if(anim){cancelAnimationFrame(anim);anim=null;}
+  if(!animate||RM()){VIEW=t;applyView();return;}
+  const f={...VIEW}, t0=performance.now(), D=400;
+  const step=n=>{
+    const k=Math.min((n-t0)/D,1), e=1-Math.pow(1-k,3);
+    VIEW={x:f.x+(t.x-f.x)*e,y:f.y+(t.y-f.y)*e,w:f.w+(t.w-f.w)*e,h:f.h+(t.h-f.h)*e};
+    applyView();
+    if(k<1)anim=requestAnimationFrame(step); else anim=null;
+  };
+  anim=requestAnimationFrame(step);
+}
+function fitTo(pts,pad,animate){
+  if(!pts||!pts.length){setView(0,0,W,animate);return;}
+  let x0=Math.min(...pts.map(p=>p.x))-pad, x1=Math.max(...pts.map(p=>p.x))+pad;
+  let y0=Math.min(...pts.map(p=>p.y))-pad, y1=Math.max(...pts.map(p=>p.y))+pad;
+  let w=x1-x0, h=y1-y0;
+  if(w/h<AR){w=h*AR;x0=(x0+x1)/2-w/2;} else {h=w/AR;y0=(y0+y1)/2-h/2;}
+  setView(x0,y0,w,animate);
+}
+function zoomBy(k,cx,cy){
+  manual();
+  const ux=cx??(VIEW.x+VIEW.w/2), uy=cy??(VIEW.y+VIEW.h/2);
+  setView(ux-(ux-VIEW.x)*k, uy-(uy-VIEW.y)*k, VIEW.w*k, false);
+}
+const toUser=(cx,cy)=>{
+  const r=map.getBoundingClientRect();
+  return [VIEW.x+(cx-r.left)/r.width*VIEW.w, VIEW.y+(cy-r.top)/r.height*VIEW.h];
+};
+
+/* 휠 */
+map.addEventListener('wheel',e=>{
+  e.preventDefault(); manual();
+  const [ux,uy]=toUser(e.clientX,e.clientY);
+  zoomBy(e.deltaY>0?1.18:1/1.18,ux,uy);
+},{passive:false});
+
+/* 드래그 · 핀치 */
+const ptrs=new Map();
+let pan=null, pinch=null;
+map.addEventListener('pointerdown',e=>{
+  map.setPointerCapture(e.pointerId);
+  ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(ptrs.size===1){
+    pan={cx:e.clientX,cy:e.clientY,vx:VIEW.x,vy:VIEW.y};
+    map.classList.add('grabbing');
+  }else if(ptrs.size===2){
+    pan=null;
+    const [a,b]=[...ptrs.values()];
+    pinch={d:Math.hypot(a.x-b.x,a.y-b.y),w:VIEW.w,
+           u:toUser((a.x+b.x)/2,(a.y+b.y)/2),vx:VIEW.x,vy:VIEW.y};
+  }
+});
+map.addEventListener('pointermove',e=>{
+  if(!ptrs.has(e.pointerId))return;
+  ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  const r=map.getBoundingClientRect();
+  if(pinch&&ptrs.size>=2){ manual();
+    const [a,b]=[...ptrs.values()];
+    const d=Math.hypot(a.x-b.x,a.y-b.y);
+    if(d>4){
+      const k=pinch.d/d, nw=pinch.w*k;
+      setView(pinch.u[0]-(pinch.u[0]-pinch.vx)*k, pinch.u[1]-(pinch.u[1]-pinch.vy)*k, nw, false);
+    }
+  }else if(pan){ manual();
+    setView(pan.vx-(e.clientX-pan.cx)/r.width*VIEW.w,
+            pan.vy-(e.clientY-pan.cy)/r.height*VIEW.h, VIEW.w, false);
+  }
+});
+const endPtr=e=>{
+  ptrs.delete(e.pointerId);
+  if(ptrs.size<2)pinch=null;
+  if(ptrs.size===0){pan=null;map.classList.remove('grabbing');}
+};
+map.addEventListener('pointerup',endPtr);
+map.addEventListener('pointercancel',endPtr);
+map.addEventListener('dblclick',e=>{
+  e.preventDefault();
+  const [ux,uy]=toUser(e.clientX,e.clientY);
+  zoomBy(1/1.9,ux,uy);
+});
+
+document.getElementById('zin').onclick=()=>zoomBy(1/1.55);
+document.getElementById('zout').onclick=()=>zoomBy(1.55);
+document.getElementById('zfit').onclick=()=>fitCurrent(true);
+
+/* ─────────── 지도 렌더 ─────────── */
+const OFF={n:[0,-26,'middle'],s:[0,34,'middle'],e:[18,6,'start'],w:[-18,6,'end'],sw:[-16,30,'end']};
+let NODES=[], CURSEL='all';
+
+function nodes(d){
+  const a=[];
+  if(d.from)a.push({x:px(d.from.lng),y:py(d.from.lat),ghost:true});
+  d.stops.forEach((s,i)=>a.push({x:px(s.lng),y:py(s.lat),i:i+1,s}));
+  return a;
+}
+function arcPath(a,b,k){
+  const mx=(a.x+b.x)/2,my=(a.y+b.y)/2,dx=b.x-a.x,dy=b.y-a.y;
+  return {d:`M${a.x.toFixed(1)},${a.y.toFixed(1)} Q${(mx-dy*k).toFixed(1)},${(my+dx*k).toFixed(1)} ${b.x.toFixed(1)},${b.y.toFixed(1)}`,
+          cx:mx-dy*k, cy:my+dx*k};
+}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+const pin=(x,y,inner)=>`<g class="pin" data-x="${x.toFixed(1)}" data-y="${y.toFixed(1)}">${inner}</g>`;
+
+function fitCurrent(animate){
+  AUTOFIT=true;
+  if(CURSEL==='all')setView(0,0,W,animate);
+  else fitTo(NODES.filter(n=>!n.ghost),95,animate);
+}
+
+function drawMap(sel){
+  CURSEL=sel;
+  const NS='non-scaling-stroke';
+  let geo=`<path d="${COASTPATH}" fill="${col('--island')}" stroke="${col('--coast')}" stroke-width="1.6" vector-effect="${NS}"/>`;
+  const hx=px(126.5292),hy=py(33.3617);
+  geo+=`<path d="M${hx-15},${hy+9} L${hx},${hy-11} L${hx+15},${hy+9} Z" fill="none" stroke="${col('--coast')}" stroke-width="1.6" vector-effect="${NS}"/>`;
+  let pins=pin(hx,hy+26,`<text fill="#4A544C" font-size="13" text-anchor="middle" font-family="${col('--mono')}" letter-spacing="1">HALLASAN</text>`);
+
+  const list = sel==='all' ? DAYS : DAYS.filter(d=>d.id===sel);
+  NODES = sel==='all' ? [] : nodes(list[0]);
+
+  list.forEach(d=>{
+    const c=col(d.color), N=nodes(d), solo=(sel!=='all');
+    const op=solo?1:.55, lw=solo?3.2:2.1;
+    for(let i=0;i<N.length-1;i++){
+      const a=arcPath(N[i],N[i+1],.085);
+      geo+=`<path d="${a.d}" fill="none" stroke="${c}" stroke-width="${lw}" stroke-linecap="round"
+            vector-effect="${NS}" opacity="${op}" ${N[i].ghost?'stroke-dasharray="7 7"':''}/>`;
+      if(solo&&N[i+1].s.leg){
+        const m=N[i+1].s.leg, w=String(m).length>2?58:50;
+        const bx=.25*N[i].x+.5*a.cx+.25*N[i+1].x, by=.25*N[i].y+.5*a.cy+.25*N[i+1].y;
+        pins+=pin(bx,by,`<rect x="${-w/2}" y="-15" width="${w}" height="30" rx="15"
+          fill="${col('--basalt')}" stroke="${c}" stroke-width="2"/>
+          <text y="6" fill="${c}" font-size="16" font-weight="600" text-anchor="middle"
+          font-family="${col('--mono')}">${m}분</text>`);
+      }
+    }
+    N.forEach(n=>{
+      if(n.ghost){
+        pins+=pin(n.x,n.y,`<circle r="7" fill="none" stroke="${c}" stroke-width="2" opacity=".6"/>`);
+      }else if(solo){
+        const o=OFF[n.s.lo]||OFF.n;
+        pins+=pin(n.x,n.y,`<circle r="15" fill="${c}"/>
+          <text y="6" fill="${col('--basalt')}" font-size="16" font-weight="700" text-anchor="middle"
+           font-family="${col('--mono')}">${n.i}</text>
+          <text x="${o[0]}" y="${o[1]}" fill="#EEF1EC" font-size="19" font-weight="700"
+           text-anchor="${o[2]}" letter-spacing="-.4" stroke="${col('--basalt')}" stroke-width="4"
+           paint-order="stroke">${esc(n.s.n)}</text>`);
+      }else{
+        pins+=pin(n.x,n.y,`<circle r="6.5" fill="${c}" opacity=".85"/>`);
+      }
+    });
+  });
+
+  map.innerHTML=`<g id="geo">${geo}</g><g id="pins">${pins}</g>`;
+  applyView();
+
+  if(!RM()){
+    map.querySelectorAll('#geo path[stroke-linecap="round"]').forEach((p,i)=>{
+      const L=p.getTotalLength();
+      if(p.getAttribute('stroke-dasharray'))return;
+      p.style.strokeDasharray=L;p.style.strokeDashoffset=L;
+      p.animate([{strokeDashoffset:L},{strokeDashoffset:0}],
+        {duration:520,delay:i*110,easing:'cubic-bezier(.4,0,.2,1)',fill:'forwards'});
+    });
+  }
+}
+
+/* ─────────── 패널 ─────────── */
+const panel=document.getElementById('panel');
+const hm=m=>m<60?`${m}분`:`${Math.floor(m/60)}시간 ${m%60?m%60+'분':''}`.trim();
+
+function drawPanel(sel){
+  if(sel==='all'){
+    panel.innerHTML=`<div class="overview">`+DAYS.map(d=>`
+      <button class="ocard" data-go="${d.id}">
+        <div>
+          <div class="d">DAY ${d.id} · ${d.date}</div>
+          <div class="h">${d.theme}</div>
+          <div class="r">${d.route}</div>
+        </div>
+        <div class="drv" style="color:${col(d.color)}">
+          <b>${hm(d.drive)}</b><small>DRIVING</small>
+        </div>
+      </button>`).join('')+`</div>`;
+    panel.querySelectorAll('[data-go]').forEach(b=>
+      b.onclick=()=>select(+b.dataset.go));
+    return;
+  }
+  const d=DAYS.find(x=>x.id===sel), c=col(d.color);
+  const pct=Math.min(d.drive/180*100,100);
+
+  let tl='';
+  d.stops.forEach((s,i)=>{
+    if(s.leg)tl+=`<div class="leg"><div class="rail"></div>
+      <div class="min">🚗 <b>${s.leg}분</b> 이동</div></div>`;
+    tl+=`<div class="stop" data-i="${i}" tabindex="0" role="button"
+      aria-label="${esc(s.n)} 지도에서 보기">
+      <div class="t">${s.t}</div>
+      <div>
+        <div class="nm"><span style="color:${c}">${i+1}.</span> ${esc(s.n)}
+          ${s.kind==='meal'?'<span class="kind meal">MEAL</span>':''}</div>
+        <div class="ds">${s.d}</div>
+        ${s.warn?`<div class="warn">${s.warn}</div>`:''}
+      </div></div>`;
+  });
+
+  panel.innerHTML=`
+    <div class="daymeta">
+      <span class="tag" style="background:${c}">DAY ${d.id} · ${d.date}</span>
+      <h2>${d.theme}</h2>
+      <div class="stay">숙소 · ${d.stay}</div>
+      <div class="gauge">
+        <div class="top">
+          <span class="lbl">하루 운전 총량</span>
+          <span class="val" style="color:${c}">${hm(d.drive)}<small>/ 3시간 목표</small></span>
+        </div>
+        <div class="track">
+          <div class="fill" style="width:${pct}%;background:${c}"></div>
+          <div class="ceil" style="left:100%"></div>
+        </div>
+        <div class="ceilnote">${d.route}</div>
+      </div>
+    </div>
+    <div class="timeline">${tl}</div>`;
+
+  const focus=el=>{
+    const n=NODES.find(x=>!x.ghost&&x.i==+el.dataset.i+1);
+    if(!n)return;
+    manual();
+    fitTo([n],140,true);
+    if(window.innerWidth<=900)
+      document.querySelector('.mapcard').scrollIntoView({behavior:RM()?'auto':'smooth',block:'center'});
+  };
+  panel.querySelectorAll('.stop').forEach(el=>{
+    el.onclick=()=>focus(el);
+    el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();focus(el);}};
+  });
+}
+
+/* ─────────── 탭 ─────────── */
+const tabs=document.getElementById('tabs');
+const ITEMS=[{v:'all',l:'전체'},...DAYS.map(d=>({v:d.id,l:`${d.id}일차`,c:d.color}))];
+tabs.innerHTML=ITEMS.map(t=>
+  `<button class="tab" role="tab" data-v="${t.v}" aria-selected="false">
+    ${t.c?`<span class="dot" style="background:${col(t.c)}"></span>`:''}${t.l}</button>`).join('');
+
+document.getElementById('legend').innerHTML=DAYS.map(d=>
+  `<span><i style="background:${col(d.color)}"></i>DAY ${d.id} · ${hm(d.drive)}</span>`).join('');
+
+function select(v){
+  tabs.querySelectorAll('.tab').forEach(b=>
+    b.setAttribute('aria-selected', String(b.dataset.v==String(v))));
+  const sel = v==='all'?'all':+v;
+  drawMap(sel);
+  drawPanel(sel);
+  fitCurrent(true);
+}
+tabs.onclick=e=>{const b=e.target.closest('.tab');if(b)select(b.dataset.v)};
+select('all');
+</script>
+</body>
+</html>
