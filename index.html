@@ -953,8 +953,15 @@ function drawMap(sel){
       if(p.getAttribute('stroke-dasharray'))return;
       const L=p.getTotalLength();
       p.style.strokeDasharray=L;p.style.strokeDashoffset=L;
-      p.animate([{strokeDashoffset:L},{strokeDashoffset:0}],
+      const an=p.animate([{strokeDashoffset:L},{strokeDashoffset:0}],
         {duration:520,delay:i*110,easing:'cubic-bezier(.4,0,.2,1)',fill:'forwards'});
+      // 등장 애니메이션이 끝나면 dash를 제거해 실선으로 고정한다.
+      // non-scaling-stroke라 dasharray가 화면 픽셀로 해석돼, 남겨두면
+      // 확대 시 선이 dash+gap으로 갈라져 점선처럼 깨져 보인다.
+      // onfinish(보일 때 즉시)와 타임아웃(숨김·중단 대비)으로 이중 정리.
+      const solid=()=>{p.style.strokeDasharray='none';p.style.strokeDashoffset='0';};
+      an.onfinish=solid;
+      setTimeout(solid,520+i*110+140);
     });
   }
 }
