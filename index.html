@@ -92,6 +92,14 @@ nav::-webkit-scrollbar{display:none}
   border-radius:5px;color:#fff;display:inline-block}
 .daymeta h2{font-size:24px;font-weight:800;letter-spacing:-.035em;margin:12px 0 4px}
 .daymeta .stayline{font-size:13px;color:var(--mid)}
+.wx{margin-top:16px;padding:12px 14px;border-radius:11px;background:#F2F5F2;
+  border-left:3px solid var(--line);line-height:1.6}
+.wx.alert{background:var(--chkbg);border-left-color:var(--chk)}
+.wx .wxh{font-family:var(--mono);font-size:10px;letter-spacing:.13em;color:var(--mute);margin-bottom:6px}
+.wx.alert .wxh{color:var(--chk)}
+.wx .fc{font-size:13px;color:var(--ink);font-weight:600}
+.wx .tp{font-size:12.5px;color:var(--mid);margin-top:4px}
+.wx .wxnote{font-size:11px;color:var(--mute);margin-top:8px;letter-spacing:-.01em;line-height:1.55}
 .gauge{margin-top:20px}
 .gauge .top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:8px}
 .gauge .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--mute)}
@@ -335,8 +343,8 @@ footer{margin-top:52px;padding-top:20px;border-top:1px solid var(--line);
         <div class="r"><span class="ap">제주</span><span class="tm">08:50</span></div>
       </div>
       <div class="need">
-        집 출발 — 김포 팀 <b>05:05</b>(광역버스) · 대구 팀 <b>06:20</b>(택시)<br>
-        공항 도착 — 김포 팀 <b>06:25</b> · 대구 팀 <b>06:45</b><br>
+        집 출발 — 김포 팀 <b>05:20</b>(관악구 · 651/지하철/택시) · 대구 팀 <b>06:20</b>(택시)<br>
+        공항 도착 목표 — 김포 팀 <b>06:50</b>(수속 마감 07:05) · 대구 팀 <b>06:45</b><br>
         제주 합류 <b>09:40</b> → 롯데렌터카 인수 <b>10:00</b>
       </div>
     </div>
@@ -360,15 +368,15 @@ footer{margin-top:52px;padding-top:20px;border-top:1px solid var(--line);
   </div>
 
   <div class="reccard" style="margin-top:14px">
-    <div class="rh"><span class="rn">김포 팀 · 계획</span><h4>광역버스 + 9호선 (또는 택시)</h4></div>
+    <div class="rh"><span class="rn">김포 팀 · 1명</span><h4>서울대입구에서 김포공항 국내선까지</h4></div>
+    <p>출발지 <b>서울 관악구 남부순환로 1988</b>(서울대입구역 인근), 목적지 김포공항 국내선. <b>07:35 이스타항공</b> 기준 <b>06:50까지 도착(수속 마감 07:05)</b>을 목표로 잡습니다. 새벽이라 어느 방법이든 여유가 있습니다.</p>
     <div class="effect">
-      05:00~05:05 집(동천로 99번길 8-6) 출발<br>
-      05:15 전후 동천역 정류장에서 <b>M4101 / 1101</b> 탑승<br>
-      05:40 전후 신논현역 하차 → 05:45~05:50 <b>9호선 급행 승차</b> (또는 택시)<br>
-      06:25 전후 김포공항 도착 → 07:35 항공편 수속 · <b>여유 약 1시간 10분</b>
+      ① <b>651번 시내버스</b> — 서울대입구 → 김포공항 직통, 환승 없음. 짐 들고 한 번에 가는 게 장점<br>
+      ② <b>지하철</b> — 2호선 → 5호선 환승으로 김포공항. 배차가 촘촘해 안정적<br>
+      ③ <b>택시</b> — 약 25km, 새벽 35~45분, 3만원 안팎. 가장 확실
     </div>
-    <p style="margin-top:11px">버스 첫차가 조금이라도 늦거나 놓치면 도착이 밀립니다. 계획에 <b>&lsquo;또는 택시&rsquo;</b>를 병기한 게 안전장치입니다. 광역버스·지하철은 캐리어 둘 공간이 마땅치 않으니, 짐이 크면 신논현부터 택시로 갈아타는 편이 편합니다.</p>
-    <p>출발 전날 밤 <b>경기버스정보 앱이나 카카오맵에서 M4101/1101 첫차 실제 도착 시각</b>을 한 번 확인해 두세요. 불안하면 택시 예약(05:20 출발)을 대안으로 걸어두면 됩니다.</p>
+    <p style="margin-top:11px">사당역에서 <b>8842 공항버스</b>를 타는 방안도 검토 중이나, <b>첫차 시각이 확인되지 않았습니다.</b> 첫차가 06:00 이후면 06:50 도착이 빠듯하니, 확정 전까지는 위 세 가지를 기본으로 두세요.</p>
+    <p>출발 전날 밤 <b>카카오맵·네이버지도에서 도착 06:50으로 놓고 651번·지하철 첫차 시각</b>을 확인하고, 불안하면 <b>카카오T 택시 예약(05:20 전후)</b>을 대안으로 걸어두면 됩니다.</p>
   </div>
 
   <div class="reccard" style="margin-top:12px">
@@ -381,7 +389,7 @@ footer{margin-top:52px;padding-top:20px;border-top:1px solid var(--line);
   </div>
 
   <p class="lead" style="margin-top:16px">
-    위 시각은 신분당선 첫차 05:30과 9호선 급행 소요시간을 기준으로 계산한 값입니다. <b>네이버 지도에서 도착 시간을 06:20으로 놓고 조회</b>하면 실제 시간표로 한 번 더 확인할 수 있습니다.
+    위 시각은 새벽 도로·첫차 소요시간을 기준으로 잡은 목표치입니다. <b>김포 팀은 도착 06:50, 대구 팀은 도착 06:45로 놓고 카카오맵·네이버지도에서 조회</b>하면 실제 시간표로 한 번 더 확인할 수 있습니다.
   </p>
 </section>
 
@@ -471,7 +479,8 @@ footer{margin-top:52px;padding-top:20px;border-top:1px solid var(--line);
     <li><b>올레시장 초장집 (시장에서 먹을 경우)</b> — 시장 회집은 대부분 포장·손질만 하고 자리가 없어, 옆 초장집에서 상차림비(1인 3,000~5,000원)를 내고 먹습니다. ① <b>마마네회포장</b> 별점 4.9, 안쪽에 테이블 몇 개 · ② <b>우정회센타 2호점</b> 5명 매장식사 후기 있음(대기 20분), 매운탕 강추 · ③ <b>싱싱올레해산물</b> 1인 15,000원 가성비. 5명이면 <b>17:30 도착으로 자리 선점</b>을 권합니다.</li>
     <li><b>저녁 예약 2건</b> — 금돗 성산흑돼지(010-7553-8655), 애월갈치 암행어사(064-799-5545). 둘 다 웨이팅·주말 혼잡 후기가 있어 미리 전화해두면 확실합니다.</li>
     <li><b>렌터카 반납 시간 연장 가능한지 문의</b> — 현재 14:00 반납 확정이라 4일차 오후가 짧습니다(비행기는 17:50/18:20). 롯데에 <b>16:00~16:30으로 연장</b>이 되는지, 추가요금이 얼마인지 확인하면 도두·이호테우 같은 코스를 하나 더 넣을 수 있습니다. ☎ 064-751-8000 (제주오토하우스)</li>
-    <li><b>택시 예약 2건</b> — 김포 팀 9/18 05:20(또는 광역버스), 대구 팀 06:20. 카카오T에서 그 시각에 예약이 잡히는지 지금 미리 조회해보세요.</li>
+    <li><b>김포 팀 교통편 확정</b> — 사당 <b>8842 공항버스 첫차 시각</b>을 확인해 06:50 도착이 가능한지 판단하세요. 안 되면 651번(서울대입구→김포공항 직통)·2→5호선 지하철·택시가 대안입니다. 택시로 갈 경우 카카오T에서 05:20 전후 예약이 잡히는지 미리 조회해두세요.</li>
+    <li><b>대구 팀 택시 예약</b> — 9/18 06:20 출발. 카카오T에서 그 시각에 예약이 잡히는지 지금 미리 조회해보세요.</li>
     <li><b>1·2일차 숙소 칫솔·치약</b> — 세 곳 다 안 줄 확률이 높아 이미 챙기기로 하셨습니다. 참고로 디아일랜드블루는 수건 추가 요청을 권합니다.</li>
     <li><b>보롬왓 개화</b> — 방문 3~4일 전 인스타그램에서 핑크뮬리 상태 확인. 영 아니면 아래 대체 후보로 틀어도 됩니다.<br>
       &nbsp;&nbsp;· <b>휴애리 자연생활공원</b> (남원, 성읍에서 20분) — 핑크뮬리를 처음 알린 곳. 계절꽃 + 동물 먹이주기로 부모님·가족에 좋음. <b>1순위 대체.</b><br>
@@ -490,6 +499,31 @@ footer{margin-top:52px;padding-top:20px;border-top:1px solid var(--line);
   </div>
 </section>
 
+<section class="blk">
+  <div class="blkhead"><span class="n">07</span><h3>무장애 · 휠체어</h3></div>
+  <p class="lead">부모님 중 휠체어 이용자가 계셔서, 공항에서 휠체어를 대여해 다니는 기준으로 방문지 접근성을 정리했습니다. 아래 <b>세 가지</b>만 기억하면 대부분 무리 없습니다.</p>
+  <div class="reccard" style="margin-bottom:16px">
+    <div class="rh"><span class="rn">핵심 3가지</span><h4>카멜리아힐 · 해수욕장 · 화장실</h4></div>
+    <p>① <b>카멜리아힐</b>은 경사·화산송이길이 있어 동반자가 필요합니다. 매표소에 <b>휠체어 추천 코스</b>를 요청하고, 검표소 옆 통로 개방을 부탁하면 편합니다. 유리온실이 특히 접근하기 좋습니다.</p>
+    <p>② <b>함덕·협재 해수욕장</b>은 모래사장 진입이 어렵습니다. 무리하지 말고 주차장·산책로·카페에서 바다를 조망하세요. 광치기·산방산·사계해변도 데크와 주차장 근처에서 봅니다.</p>
+    <p>③ <b>장애인화장실</b>은 천지연폭포·오설록·카멜리아힐·공항에 있습니다. 이동 동선을 이 지점들에 맞춰 잡으면 안심입니다.</p>
+  </div>
+  <div class="tblwrap">
+  <table class="wide">
+    <thead><tr><th>장소</th><th>접근성</th><th>메모</th></tr></thead>
+    <tbody>
+      <tr><td><b>천지연폭포</b><span class="alt">2일차</span></td><td class="ok">매우 좋음</td><td>포장도로에 경사가 완만해 폭포 정면까지 접근됩니다. <b>장애인화장실·전용주차</b> 있음.</td></tr>
+      <tr><td><b>오설록</b><span class="alt">3일차</span></td><td class="ok">좋음</td><td>턱이 없고 엘리베이터·장애인화장실·휠체어 대여가 있습니다. 실내 위주라 날씨 영향도 적음.</td></tr>
+      <tr><td><b>성읍민속마을</b><span class="alt">2일차</span></td><td>보통</td><td>평지 흙길이라 이동은 무난합니다. 다만 초가집 내부는 문턱이 있어 마당에서 관람합니다.</td></tr>
+      <tr><td><b>카멜리아힐</b><span class="alt">3일차</span></td><td class="no">동반자 필수</td><td>경사·화산송이길 구간이 있습니다. 매표소에 <b>추천 코스·통로 개방</b>을 요청하세요. 유리온실이 접근 용이.</td></tr>
+      <tr><td><b>함덕·협재 해수욕장</b><span class="alt">1·3일차</span></td><td class="no">조망만</td><td>모래사장 진입 불가. 주차장·산책로·카페에서 바다를 봅니다.</td></tr>
+      <tr><td><b>광치기·산방산·사계해변</b><span class="alt">1·3일차</span></td><td>조망</td><td>데크와 주차장 근처에서 조망합니다.</td></tr>
+      <tr><td><b>사려니숲길</b><span class="alt">1일차</span></td><td>입구만</td><td>입구 데크 구간만 잠깐 둘러봅니다.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
 <footer>
   JEJU ITINERARY · v2 · 이동시간·영업시간·동선을 모두 점검해 반영했습니다<br>
   이동시간은 평상시 교통 기준 추정치 · 주말과 성수기에는 10~20% 여유를 두세요
@@ -505,6 +539,8 @@ const DAYS=[
 {
  id:1,date:'9/18 금',theme:'제주 동부 해안 & 숲',color:'--d1',stay:'더베스트 제주 성산호텔',
  route:'공항 → 함덕 → 사려니숲길 → 광치기 → 성산',
+ weather:{fc:'곳에 따라 비 · 강수량 편차 큼(5~60mm)',
+   tip:'사려니숲길은 비 상태를 보고 데크 구간만 유연하게, 비가 오면 함덕은 오션뷰 카페로 대신합니다.'},
  stops:[
   {t:'09:15',n:'제주공항',lat:33.5113,lng:126.4930,lo:'sw',
    d:'김포 팀 <b>08:50</b> · 대구 팀 <b>09:15</b> 도착. 수하물까지 감안하면 <b>09:40 합류</b>가 현실적입니다. 롯데렌터카 예약이 10:00이라 셔틀 이동·수속 후 10:40쯤 출발합니다. 10:50 제주김만복김밥 본점에서 포장.',
@@ -526,6 +562,8 @@ const DAYS=[
 {
  id:2,date:'9/19 토',theme:'전통문화 & 서귀포',color:'--d2',stay:'디아일랜드블루호텔 · 올레시장 도보권',
  route:'성산 → 청솔밥상 → 성읍 → 보롬왓 → 바당길 → 천지연 → 올레시장',
+ weather:{alert:true,fc:'오전 비, 오후 갬',
+   tip:'오전에 비가 오면 야외(성읍·보롬왓)를 오후로 미루고, 실내 코스(제주민속촌 등)나 카페를 먼저 도세요. 천지연은 우산으로도 무난합니다. 오전↔오후 순서를 바꿀 수 있게 여유를 둡니다.'},
  from:{lat:33.4590,lng:126.9330},
  stops:[
   {t:'08:40',n:'청솔밥상',lat:33.4638,lng:126.9341,lo:'e',leg:10,
@@ -551,6 +589,8 @@ const DAYS=[
 {
  id:3,date:'9/20 일',theme:'제주 서부 절경',color:'--d3',stay:'베니키아호텔 제주 · 애월해안로',
  route:'서귀포 → 산방산 → 번네식당 → 카멜리아힐 → 오설록 → 협재 → 애월',
+ weather:{fc:'오전 구름, 대체로 맑음',
+   tip:'날씨 걱정은 크지 않습니다. 협재·사계해변의 자외선과 바람만 대비하세요.'},
  from:{lat:33.2459,lng:126.5658},
  stops:[
   {t:'08:30',n:'다정김밥 (포장)',lat:33.2364,lng:126.5001,lo:'s',leg:15,
@@ -579,6 +619,8 @@ const DAYS=[
 {
  id:4,date:'9/21 월',theme:'애월 & 제주공항',color:'--d4',stay:'—',
  route:'애월 → 유니클로 → 먹돌고기국수 → 쓸제주 → 렌터카 반납 → 공항',
+ weather:{fc:'예보 범위 밖(9/16 기준)',
+   tip:'쇼핑·공항 위주라 날씨 영향이 적습니다. 출발 전 최신 예보만 한 번 확인하세요.'},
  from:{lat:33.4777,lng:126.3621},
  stops:[
   {t:'10:00',n:'애월 브런치오',lat:33.4767,lng:126.3537,lo:'w',leg:3,
@@ -631,7 +673,7 @@ const INFO=[
    {n:'금돗 성산흑돼지',s:'1일차 저녁 · 흑돼지',r:'<span class="tel">010-7553-8655</span><br>대기 많음 · 예약 권장'},
    {n:'애월갈치 암행어사',s:'3일차 저녁 · 통갈치',r:'<span class="tel">064-799-5545</span><br>일요일 저녁 혼잡 · 예약 권장'},
    {n:'렌터카 · 롯데렌터카',s:'9/18 10:00 ~ 9/21 14:00',r:'제주오토하우스 용해로 92<br><span class="tel">064-751-8000</span> · 반납 연장 문의'},
-   {n:'택시 (김포·대구)',s:'9/18 새벽',r:'카카오T 전날 예약<br>김포는 광역버스 대안'}
+   {n:'교통편 (김포·대구)',s:'9/18 새벽',r:'대구 택시 06:20 · 카카오T 예약<br>김포 651/지하철/택시 · 8842 확인 중'}
  ]},
  {hd:'입장료 있는 곳',rows:[
    {n:'보롬왓',s:'2일차 · 꽃정원',r:'<b>6,000원</b> · 주차 <span class="free">무료</span>'},
@@ -917,6 +959,12 @@ function drawPanel(sel){
       <span class="tag" style="background:${c}">DAY ${d.id} · ${d.date}</span>
       <h2>${d.theme}</h2>
       <div class="stayline">숙소 · ${d.stay}</div>
+      ${d.weather?`<div class="wx${d.weather.alert?' alert':''}">
+        <div class="wxh">WEATHER · ${d.date}</div>
+        <div class="fc">${d.weather.fc}</div>
+        <div class="tp">${d.weather.tip}</div>
+        <div class="wxnote">9/16 기상청 발표 기준 예보입니다. 강수량 편차가 커 출발 2~3일 전 최신 예보를 다시 확인하세요.</div>
+      </div>`:''}
       <div class="gauge">
         <div class="top">
           <span class="lbl">하루 운전 총량</span>
